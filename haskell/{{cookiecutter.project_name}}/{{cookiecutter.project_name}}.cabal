@@ -1,0 +1,95 @@
+cabal-version:       2.2
+name:                {{cookiecutter.project_name}}
+version:             0.1.0.0
+synopsis:            {{cookiecutter.project_synopsis}}
+description:         Cf README file
+homepage:            https://github.com/{{cookiecutter.github_owner}}/{{cookiecutter.project_name}}
+bug-reports:         https://github.com/{{cookiecutter.github_owner}}/{{cookiecutter.project_name}}/issues
+license:             CC0-1.0
+license-file:        LICENSE
+author:              {{cookiecutter.hackage_author}}
+maintainer:          {{cookiecutter.maintainer_email}}
+-- category:            CATEGORY
+build-type:          Simple
+-- data-files:          data/*
+extra-source-files:  README.md, *.nix
+tested-with:         GHC <8.12 && >=8.4.4
+
+source-repository head
+  type:     git
+  location: git://github.com/{{cookiecutter.github_owner}}/{{cookiecutter.project_name}}.git
+
+flag enable-hlint-test
+  description: Enable hlint test-suite
+  manual: True
+  default: False
+
+common common
+  build-depends: base >=4.7 && <5, relude
+  default-language: Haskell2010
+  mixins: base hiding (Prelude)
+  other-modules:
+    Prelude
+
+library
+  import: common
+  exposed-modules:
+    Imm
+  -- other-modules:
+  -- build-depends:
+  hs-source-dirs: src/lib
+  ghc-options: -Wall -fno-warn-unused-do-bind
+
+executable {{cookiecutter.project_name}}
+  import: common
+  build-depends: {{cookiecutter.project_name}}
+  main-is: Main.hs
+  other-modules:
+    Paths_{{cookiecutter.project_name}}
+  autogen-modules: Paths_{{cookiecutter.project_name}}
+  hs-source-dirs: src/main
+  ghc-options: -Wall -fno-warn-unused-do-bind -threaded
+
+test-suite quickcheck
+  import: common
+  type: exitcode-stdio-1.0
+  main-is: QuickCheck.hs
+  build-depends:
+    {{cookiecutter.project_name}},
+    QuickCheck,
+    quickcheck-instances,
+    tasty,
+    tasty-quickcheck
+  hs-source-dirs: test
+
+test-suite golden
+  import: common
+  type: exitcode-stdio-1.0
+  main-is: GoldenTests.hs
+  build-depends:
+    {{cookiecutter.project_name}},
+    filepath,
+    tasty,
+    tasty-golden
+  hs-source-dirs: test
+
+test-suite unit
+  import: common
+  type: exitcode-stdio-1.0
+  main-is: UnitTests.hs
+  build-depends:
+    {{cookiecutter.project_name}},
+    tasty,
+    tasty-hunit
+  hs-source-dirs: test
+
+test-suite hlint
+  import: common
+  if flag(enable-hlint-test)
+    buildable: True
+  else
+    buildable: False
+  type: exitcode-stdio-1.0
+  main-is: HLint.hs
+  build-depends: hlint
+  hs-source-dirs: test

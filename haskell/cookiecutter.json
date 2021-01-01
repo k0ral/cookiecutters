@@ -1,0 +1,9 @@
+{
+  "github_owner": "k0ral",
+  "hackage_author": "koral",
+  "maintainer_email": "mail@cmoreau.info",
+  "project_name": "new-project",
+  "project_synopsis": "See README.",
+
+  "_copy_without_render": [".github/workflows/ci.yml"]
+}

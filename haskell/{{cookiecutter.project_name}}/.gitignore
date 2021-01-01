@@ -1,0 +1,28 @@
+# Haskell
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+*.prof
+*.aux
+*.hp
+
+# Cabal
+dist*
+cabal-dev
+.cabal-sandbox/
+cabal.sandbox.config
+
+# Stack
+.stack-work
+stack.yaml
+
+# Direnv
+.envrc
+
+# Nix
+result

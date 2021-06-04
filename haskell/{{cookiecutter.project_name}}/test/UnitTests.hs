@@ -10,5 +10,5 @@ main = defaultMain $ testGroup "Unit tests"
 
 unit_test :: TestTree
 unit_test = testCase "Test name" $ do
-  undefined @?= undefined
-  undefined @?= undefined
+  True @?= True
+  False @?= False

@@ -7,9 +7,9 @@ import           Test.Tasty.QuickCheck
 
 main :: IO ()
 main = defaultMain $ testGroup "Properties"
-  [ property
+  [ property1
   ]
 
 
-property :: TestTree
-property = testProperty "property name" $ \input -> undefined === undefined
+property1 :: TestTree
+property1 = testProperty "property name" $ True === True

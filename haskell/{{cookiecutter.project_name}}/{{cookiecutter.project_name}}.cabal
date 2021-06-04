@@ -33,8 +33,7 @@ common common
 
 library
   import: common
-  exposed-modules:
-    Imm
+  -- exposed-modules:
   -- other-modules:
   -- build-depends:
   hs-source-dirs: src/lib
